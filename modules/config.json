@@ -1,0 +1,58 @@
+
+{ 
+    "device" : "cuda:5",
+
+
+    "dataset" :
+    {
+        "img_dir" : "directory to real images used for training",
+        "cond_syn_img_dir" : "directory to mask conditionally generated images",
+        "cond_syn_img_dir_with_pred_mask" : "directory to mask conditionally generated images with predicted mask",
+        "uncond_syn_img_dir" : "directory to unconditionally generated images with the model that predict only the image",
+        "4channels_img_dir" : "directory to unconditionally generated images with the model that predict both the image and the mask",
+        "test_dir" : "directory to real images used for testing",
+        "batch_size" : 8,
+        "fraction" : 0.4,
+        "validation_split" : 0.10
+    },
+
+
+    "segmentation_model" :   
+    {
+        "input_channels" : 3,
+        "output_channels" : 1,
+        "base_channels" : 32,
+        "channel_multiplier" : [1, 2, 4, 8, 16],
+        "num_resblocks" : [1, 2, 2, 3, 4],
+        "num_groups" : 8,
+        "downsampling_kernel_dim" : 2
+    },
+
+
+    "training_configuration" :
+    {
+        "num_epochs" : 100,
+        "learning_rate" : 1e-5,
+        "grad_clip" : 1.0
+    },
+
+
+    "saving_configuration" :
+    {
+        "save_folder" : "save folder for the segmentation model after training"
+    },
+
+
+    "eval_config":
+    {
+        "real_model_dir" : "directory where the segmentaion model trained on real images is saved",
+        "cond_model_dir" : "directory where the segmentaion model trained on conditionally generated images is saved",
+        "uncond_model_dir" : "directory where the segmentaion model trained on unconditionally generated images is saved",
+        "cond_with_pred_model_dir" : "directory where the segmentaion model trained on conditionally generated images with predicted mask is saved",
+        "uncond4ch_model_dir" : "directory where the segmentaion model trained on unconditionally generated images with the model that predict both the image and the mask is saved",
+        "save_results_dir" : "directory to save the results",
+        "num_samples_for_dice" : 5000,
+        "num_imgs_to_show" : 5
+    }
+
+}
